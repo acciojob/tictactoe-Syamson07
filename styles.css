@@ -1,10 +1,9 @@
-/*  your css code here. If applicable */
 body {
   font-family: Arial, sans-serif;
   text-align: center;
+  background-color: #f4f4f4;
   margin: 0;
   padding: 20px;
-  background-color: #f4f4f4;
 }
 
 .container {
@@ -12,32 +11,39 @@ body {
   margin: auto;
 }
 
-.player-inputs input, .player-inputs button {
-  margin: 10px;
+.player-inputs input,
+.player-inputs button {
   padding: 10px;
   font-size: 16px;
+  margin: 5px;
+}
+
+h1 {
+  margin-bottom: 10px;
+}
+
+.message {
+  font-size: 18px;
+  font-weight: bold;
+  margin: 10px 0;
 }
 
 .board {
   display: grid;
   grid-template-columns: repeat(3, 100px);
   gap: 5px;
-  margin: 20px auto;
   justify-content: center;
+  margin-top: 20px;
 }
 
 .cell {
   width: 100px;
   height: 100px;
-  background: #fff;
-  border: 2px solid #333;
+  background-color: #fff;
+  border: 2px solid #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-size: 36px;
-  line-height: 100px;
   cursor: pointer;
-}
-
-.message {
-  font-size: 20px;
-  margin: 10px 0;
-  font-weight: bold;
 }
