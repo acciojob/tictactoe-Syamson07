@@ -4,155 +4,55 @@
   <meta charset="UTF-8">
   <title>Tic Tac Toe</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      text-align: center;
-      background-color: #f9f9f9;
-      margin: 0;
-      padding: 0;
-    }
     .container {
-      padding: 20px;
+      text-align: center;
+      margin-top: 20px;
     }
-    #board {
+    .board {
       display: grid;
       grid-template-columns: repeat(3, 100px);
-      grid-template-rows: repeat(3, 100px);
-      gap: 5px;
-      margin: 20px auto;
-      width: 320px;
+      grid-gap: 5px;
+      justify-content: center;
+      margin-top: 20px;
     }
     .cell {
-      background-color: #fff;
-      border: 2px solid #333;
-      font-size: 2em;
+      width: 100px;
+      height: 100px;
+      background-color: #f2f2f2;
+      font-size: 48px;
       display: flex;
-      align-items: center;
       justify-content: center;
+      align-items: center;
       cursor: pointer;
-      user-select: none;
-    }
-    .message {
-      margin-top: 20px;
-      font-size: 1.2em;
-      color: #333;
-    }
-    #submit {
-      margin-top: 10px;
-      padding: 8px 16px;
-      font-size: 16px;
-    }
-    input {
-      margin: 5px;
-      padding: 8px;
-      font-size: 16px;
     }
   </style>
 </head>
 <body>
 
 <div class="container">
-  <div id="start">
-    <input type="text" id="player-1" placeholder="Player 1 Name">
-    <input type="text" id="player-2" placeholder="Player 2 Name">
-    <br>
-    <button id="submit">Submit</button>
-  </div>
+  <!-- Player input section -->
+  <input type="text" id="player1" placeholder="Player 1 Name">
+  <input type="text" id="player2" placeholder="Player 2 Name">
+  <button id="submit">Submit</button>
 
-  <div id="game" style="display: none;">
-    <h1>Tic Tac Toe</h1>
-    <div class="message"></div>
-    <div id="board"></div>
+  <!-- Message -->
+  <h1>Tic Tac Toe</h1>
+  <div class="message"></div>
+
+  <!-- Game Board -->
+  <div class="board" id="board" style="display: none;">
+    <div class="cell" id="1"></div>
+    <div class="cell" id="2"></div>
+    <div class="cell" id="3"></div>
+    <div class="cell" id="4"></div>
+    <div class="cell" id="5"></div>
+    <div class="cell" id="6"></div>
+    <div class="cell" id="7"></div>
+    <div class="cell" id="8"></div>
+    <div class="cell" id="9"></div>
   </div>
 </div>
 
-<script>
-  const submitBtn = document.getElementById('submit');
-  const startDiv = document.getElementById('start');
-  const gameDiv = document.getElementById('game');
-  const boardDiv = document.getElementById('board');
-  const messageDiv = document.querySelector('.message');
-
-  let player1 = '';
-  let player2 = '';
-  let currentPlayer = '';
-  let currentSymbol = '';
-  let board = Array(9).fill('');
-
-  submitBtn.addEventListener('click', () => {
-    const p1 = document.getElementById('player-1').value.trim();
-    const p2 = document.getElementById('player-2').value.trim();
-    if (p1 && p2) {
-      player1 = p1;
-      player2 = p2;
-      currentPlayer = player1;
-      currentSymbol = 'X';
-      startDiv.style.display = 'none';
-      gameDiv.style.display = 'block';
-      messageDiv.textContent = `${currentPlayer}, you're up!`;
-      createBoard();
-    } else {
-      alert('Please enter names for both players!');
-    }
-  });
-
-  function createBoard() {
-    boardDiv.innerHTML = '';
-    for (let i = 0; i < 9; i++) {
-      const cell = document.createElement('div');
-      cell.className = 'cell';
-      cell.id = (i + 1).toString();
-      cell.addEventListener('click', handleCellClick);
-      boardDiv.appendChild(cell);
-    }
-  }
-
-  function handleCellClick(event) {
-    const cell = event.target;
-    const cellIndex = parseInt(cell.id) - 1;
-
-    if (board[cellIndex] !== '') return; // already filled
-
-    board[cellIndex] = currentSymbol;
-    cell.textContent = currentSymbol;
-
-    if (checkWin()) {
-      messageDiv.textContent = `${currentPlayer}, congratulations you won!`;
-      boardDiv.querySelectorAll('.cell').forEach(c => c.removeEventListener('click', handleCellClick));
-      return;
-    }
-
-    if (board.every(c => c !== '')) {
-      messageDiv.textContent = `It's a draw!`;
-      return;
-    }
-
-    switchPlayer();
-  }
-
-  function switchPlayer() {
-    if (currentPlayer === player1) {
-      currentPlayer = player2;
-      currentSymbol = 'O';
-    } else {
-      currentPlayer = player1;
-      currentSymbol = 'X';
-    }
-    messageDiv.textContent = `${currentPlayer}, you're up!`;
-  }
-
-  function checkWin() {
-    const winPatterns = [
-      [0,1,2], [3,4,5], [6,7,8], // rows
-      [0,3,6], [1,4,7], [2,5,8], // columns
-      [0,4,8], [2,4,6]           // diagonals
-    ];
-
-    return winPatterns.some(pattern => 
-      pattern.every(index => board[index] === currentSymbol)
-    );
-  }
-</script>
-
+<script src="script.js"></script>
 </body>
 </html>
